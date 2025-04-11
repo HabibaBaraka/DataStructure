@@ -154,6 +154,50 @@ class DoublyLinkedList {
 		  }
 		  cout << endl;
 	  }
+  void dltOdd() {
+	 
+	  for (int i = len; i >= 1; i--) {
+		  if (i & 1) {
+			  dltAt(i);
+		  }
+	  }
+  }
+  void dltEven() {
+
+	  for (int i = len; i >= 1; i--) {
+		  if (!(i & 1)) {
+			  dltAt(i);
+		  }
+	  }
+  }
+  bool isPalindrome() {
+	  Node* l = first, * r = last;
+	  int cnt = len / 2;
+	  while (cnt--) {
+		  if (l->data != r->data)return 0;
+		  l = l->next;
+		  r = r->pre;
+	  }
+	  return 1;
+  }
+  void reverse() {
+	  Node* l = first, * r = last;
+	  int cnt = len / 2;
+	  while (cnt--) {
+		  swap(l->data, r->data);
+		  l = l->next;
+		  r = r->pre;
+	  }
+  }
+  // great idea
+  int middle() {
+	  Node* slow = first,*fast=first;
+	  while (fast&&fast!=last) {
+		  slow = slow->next;
+		  fast = (fast->next)->next;
+	  }
+	  return (slow->data);
+  }
 	  ~DoublyLinkedList() {
 		  while (first) {
 			  dltF();
