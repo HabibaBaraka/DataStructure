@@ -475,6 +475,15 @@ public:
 			}
 		}
 	}
+void deleteNode(Node* node) {
+       
+        Node*nn;
+        nn=node->next;
+        node->data=nn->data;
+        node->next=nn->next;
+        delete nn;
+        
+    }
 	
 };
 
