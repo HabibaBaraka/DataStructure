@@ -1,0 +1,93 @@
+// manualStack.cpp : 
+#include <iostream>
+#include <string>
+#include <cassert>
+using namespace std;
+const int MAX_SIZE = 100;
+template<class t>
+class Stack
+{
+private:
+	int top;
+	t item[MAX_SIZE];
+	int top2;
+	
+public:
+	Stack() {
+		top = -1;
+		top2 =MAX_SIZE;
+	}
+	void push(t val,int id) {
+		// if top not equal size-1
+		assert(top + 1< top2);
+		if (id == 1) {
+			assert(top < MAX_SIZE - 1);
+			top++;
+			item[top] = val;
+		}
+		else {
+			
+			top2--;
+			item[top2] = val;
+		}
+	}
+	bool empty() {
+		return top == -1&&top2==MAX_SIZE;
+
+	}
+	void pop(int id) {
+		// if stack is empty
+		if (id == 1) {
+			assert(top >= 0);
+			top--;
+		}
+		else {
+			assert(top2 < MAX_SIZE);
+			top2++;
+		}
+	}
+	void pop(t& element) {
+		// if stack is empty
+		assert(top >= 0);
+		element = item[top];
+		top--;
+	}
+	t getTop() {
+		// if stack is empty
+		assert(top >= 0);
+
+		return item[top];
+		//		cout<< Top;
+	}
+	void print() {
+		// if stack is empty
+		assert(top >= 0);
+		cout << '[';
+		for (int i = top; i >=0; i--) {
+			cout << item[i] << " ";
+		}
+		cout <<']'<< endl<<'[;
+		for (int i = top2; i <MAX_SIZE; i++) {
+			cout << item[i] << " ";
+		}
+		cout << ']';
+		cout << endl;
+	}
+
+};
+
+int main()
+{
+	Stack<int> st;
+	st.push(5, 1);
+	st.push(5, 1);
+	st.push(2, 1);
+	st.push(8, 2);
+	st.push(4, 2);
+	st.push(3, 2);
+	st.print();
+}
+/*
+call by reference you make change on var itself
+call by value
+*/
