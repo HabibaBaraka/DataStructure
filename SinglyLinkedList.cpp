@@ -484,7 +484,39 @@ void deleteNode(Node* node) {
         delete nn;
         
     }
-	
+	Node* deleteLastOccurrence(Node* head, int key) {
+    Node *last = nullptr, *lastPrev = nullptr;
+    Node *curr = head, *prev = nullptr;
+
+    // Traverse the list to find the last 
+  	// occurrence of the key
+    while (curr != nullptr) {
+        if (curr->data == key) {
+            lastPrev = prev;
+            last = curr;
+        }
+        prev = curr;
+        curr = curr->next;
+    }
+
+    // If the key was found
+    if (last != nullptr) {
+        
+      	// If last occurrence is not the head
+        if (lastPrev != nullptr) {
+            lastPrev->next = last->next;
+        } else {
+          
+            // If last occurrence is the head, 
+          	// move head to next node
+            head = head->next;
+        }
+        delete last;
+    }
+
+    return head;
+}
+
 };
 
 int main()
