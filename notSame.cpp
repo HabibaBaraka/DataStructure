@@ -1,0 +1,93 @@
+// notSame.cpp : This file contains the 'main' function. Program execution begins and ends there.
+//
+
+// Queue.cpp 
+// simple 
+// circuler
+// priority queue pq
+// dequeue  dq
+#include<cassert>
+#include <iostream>
+using namespace std;
+
+class queue {
+private:
+	struct node {
+		int val;
+		node* next;
+	};
+	node* front = nullptr;
+	node* rear = nullptr;
+public:
+	void insert(int data) {
+		node* nn = new node;
+		nn->val = data;
+		nn->next = nullptr;
+		if (front == nullptr) {
+			front = nn;
+			rear = front;
+			rear->next = front;
+		}
+		else {
+
+			rear->next = nn;
+			rear = nn;
+			rear->next = front;
+		}
+	}
+
+	void dlt() {
+		if (front == nullptr)return;
+		if (front == rear) {
+			// dlt node 
+			node* dltn = front;
+			front = nullptr;
+			rear = nullptr;
+			delete dltn;
+			return;
+		}
+		node*nfront = front->next;
+		delete front;
+		front = nfront;
+		rear->next = front;
+	}
+	void enQueue(int val) {
+		insert(val);
+	}
+	void deQueue() {
+		dlt();
+	}
+	int peek() {
+         if(front==nullptr)return -1;
+		return front->val;
+		
+	}
+	void disply() {
+       if(front==nullptr)return;
+		node* top = front;
+		cout << top->val<<" ";
+		top = top->next;
+		while (top!=front) {
+			cout << top->val << " ";
+			top = top->next;
+		}
+		cout << endl;
+	}
+
+
+};
+int main()
+{
+	queue q;
+	q.enQueue(8);
+	q.enQueue(3);
+	q.enQueue(2);
+	q.enQueue(9);
+	q.enQueue(6);
+	q.enQueue(5);
+	q.disply();
+	q.deQueue();
+	q.disply();
+
+	cout << q.peek();
+}
