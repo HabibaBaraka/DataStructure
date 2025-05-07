@@ -223,6 +223,36 @@ public:
 		// case node has two children we raplace it with it's succcesor (the min on the right sub tree)
 
 	}
+bool isCompleteTree(node* root) {
+        if (root == nullptr)return 0;
+queue<node*>q;
+q.push(root);
+bool f = 1;
+
+while (!q.empty()) {
+	
+		TreeNode* cur = q.front();
+	
+		if (cur->left) { 
+			if (!f)return 0;
+			q.push(cur->left);
+			
+		}
+		else f = 0;
+		
+		if (cur->right) {
+			if (!f)return 0;
+			q.push(cur->right); 
+		}
+		else {
+			
+			 f = 0;
+		}
+		q.pop();
+	
+}
+return 1;
+    }
 	int getMax() {
 		if (isEmpty()) {
 			cout << "empty tree\n";
