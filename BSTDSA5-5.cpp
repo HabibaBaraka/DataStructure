@@ -253,6 +253,14 @@ while (!q.empty()) {
 }
 return 1;
     }
+ void invert(node*&p) {
+	//base case
+	if (!p)return ;
+    swap(p->left,p->right);
+	//transition 
+	invert(p->left);
+    invert(p->right);
+}
 	int getMax() {
 		if (isEmpty()) {
 			cout << "empty tree\n";
@@ -275,6 +283,7 @@ return 1;
 		}
 		return cur->val;
 	}
+
 };
 int main()
 {
