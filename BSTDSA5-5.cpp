@@ -346,6 +346,15 @@ node* predecessor(node* p) {
 		else cur = cur->left;
 	}
 }
+bool symmetric(node*p,node*q){
+     // the base case 
+      if(!p&&!q)return 1;
+      if(!p||!q)return 0;
+      if(p->val!=q->val)return 0;
+      // transition
+     return symmetric(p->right,q->left)&&
+       symmetric(p->left,q->right);
+   }
 
 };
 int main()
