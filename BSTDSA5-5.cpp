@@ -283,6 +283,60 @@ return 1;
 		}
 		return cur->val;
 	}
+// successor 
+// the node has right subtree get the minimum in it 
+// the node not has right subtree but its right child in this case we look up until we find node unlike with it , we take it parent
+// the third case the node is left child in this case we take the parent of it
+node* successor(node* p) {
+	//case number one 
+	if (p->right) {
+		node* cur = p->right;
+		while (cur->left) {
+			cur = cur->left;
+		}
+		return cur;
+
+	}
+	// case three and two *beautiful*
+	node* cur = root, * suc = NULL;
+	while (cur->val != p->val) {
+		if (cur->val >= p->val) {
+			suc = cur;
+			cur = cur->left;
+		}
+		else cur = cur->right;
+	}
+	return suc;
+	
+}
+
+
+
+
+
+// predecessor 
+// the node has left subtree get the maximum in it 
+// the node not has left subtree but its right child in this case we take its parent
+// the third case the node is left child in this case we look up until we find node unlike with it 
+node* predecessor(node* p) {
+ // case one 
+	if (p->left) {
+		node* cur = p->left;
+		while (cur->right) {
+			cur = cur->right;
+		}
+		return cur;
+	}
+	// case two and three also *beautiful*
+	node* prede = NULL, * cur = root;
+	while (cur->val != p->val) {
+		if (p->val > cur->val) {
+			prede = cur;
+			cur = cur->right;
+		}
+		else cur = cur->left;
+	}
+}
 
 };
 int main()
