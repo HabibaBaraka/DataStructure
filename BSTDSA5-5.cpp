@@ -74,6 +74,15 @@ public:
 	bool isEmpty() {
 		return root == NULL;
 	}
+ bool same(node*p,node*q){
+     // the base case 
+      if(!p&&!q)return 1;
+      if(!p||!q)return 0;
+      if(p->val!=q->val)return 0;
+      // transition
+     return same(p->right,q->right)&&
+       same(p->left,q->left);
+   }
 	bool searchRec(node* p, int val) {
 		//base case
 		if (!p)return false;
