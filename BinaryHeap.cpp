@@ -1,48 +1,55 @@
-// BinaryHeap.cpp :
+﻿// BinaryHeap.cpp :
 
 #include <iostream>
+#include<vector>
 using namespace std;
 class Heap {
 	// O(log(n))
 	//space O(log(n)
-	void heapify(int arr[], int n, int i) {
+	vector<int>arr;
+	void heapify(int i) {
 		int l = 2 * i + 1;
 		int r = 2 * i + 2;
 		int mx = i;
 
 		//base case
-		if (l<n&&arr[l] > arr[mx]) {
+		if (l < arr.size() && arr[l] > arr[mx]) {
 			mx = l;
 		}
-		if (r<n&&arr[r] > arr[mx]) {
+		if (r < arr.size() && arr[r] > arr[mx]) {
 			mx = r;
 		}
 		//transition
 		if (mx != i) {
 			swap(arr[i], arr[mx]);
-			heapify(arr, n, mx);
+			heapify(mx);
 		}
-		
-		
+
+
+	}
+	void build() {
+		//O(n)
+		int n = arr.size();
+		for (int i = (n / 2) - 1; i >= 0; i--) {
+			heapify(i);
+		}
 	}
 public:
 	
-	void build(int arr[],int n) {
-		//O(n)
-		for (int i = (n / 2) - 1; i >= 0; i--) {
-			heapify(arr, n, i);
-		}
+	void insert(int x) {
+		arr.push_back(x);
+		build();
 	}
-	void sortHeap(int arr[], int n) {
-		// O(nlog(n))
-		build(arr, n);
-		for (int i = n - 1; i >= 0; i--) {
-			swap(arr[0], arr[i]);
-			heapify(arr,i,0);
-		}
+	int dlt() {
+		int x = arr[0];
+		swap(arr[0], arr[arr.size() - 1]);
+		arr.pop_back();
+		build();
+		return x;
 	}
-	void print(int arr[],int n) {
+	void print() {
 		//O(n)
+		int n = arr.size();
 		for (int i = 0; i < n; i++) {
 			cout << arr[i] << " ";
 		}
@@ -51,16 +58,14 @@ public:
 };
 int main()
 {
-	Heap pq;
-	int arr[] = { 4,7 ,8,23,90 };
-	int n = sizeof(arr) / sizeof(arr[0]);
-	cout << "before Heap\n";
-	pq.print(arr, n);
-	cout << "after Heap\n";
-	pq.build(arr, n);
-	pq.print(arr, n);
-	cout << "after sort Heap\n";
-	pq.sortHeap(arr, n);
-	pq.print(arr, n);
+	Heap h;
+	h.insert(10);
+	h.insert(20);
+	h.insert(5);
+	h.insert(30);
+	h.insert(15);
 
+	h.print();   // قبل الحذف
+	h.dlt();   // حذف الجذر (أكبر عنصر)
+	h.print();   // بعد الحذف
 }
