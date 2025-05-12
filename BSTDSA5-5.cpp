@@ -355,7 +355,19 @@ bool symmetric(node*p,node*q){
      return symmetric(p->right,q->left)&&
        symmetric(p->left,q->right);
    }
+node* searchRec(node* p, int val) {
+	//base case
+	if (!p)return nullptr;
+	if (p->val > val)return p;
+	//transition
+		searchRec(p->right, val);
 
+}
+int upper_bound(int val) {
+	node* n = searchRec(root->right, val);
+	if (n)return n->val;
+	else return -1;
+}
 };
 int main()
 {
