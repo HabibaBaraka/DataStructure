@@ -152,6 +152,23 @@ public:
 		int balance = getBalance(p);
 		 balanceTree(p, val, balance);
 	}
+
+node* searchRec(node* p, int val) {
+	//base case
+	if (!p)return nullptr;
+	if (p->val >= val)return p;
+	//transition
+	if (val > p->val) {
+		searchRec(p->right, val);
+	}
+	else searchRec(p->left, val);
+
+}
+int lower_bound(int val) {
+	node* n = searchRec(root, val);
+	if (n)return n->val;
+	else return -1;
+}
 	
 	void preOrder(node* root) {
 		if (root != nullptr) {
