@@ -169,6 +169,18 @@ int lower_bound(int val) {
 	if (n)return n->val;
 	else return -1;
 }
+node* search(node* p, int val) {
+	//base case
+	if (!p)return nullptr;
+	if (p->val >= val) { if(p->val>val)return p; }
+	//transition
+		search(p->right, val);
+}
+int upper_bound(int val) {
+	node* n = search(root, val);
+	if (n)return n->val;
+	else return -1;
+}
 	
 	void preOrder(node* root) {
 		if (root != nullptr) {
