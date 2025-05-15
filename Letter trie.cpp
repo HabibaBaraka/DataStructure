@@ -52,6 +52,52 @@ public:
 		// such path not exist
 		return child[cur]->prefixExist(s, idx + 1);
 	}
+// iterative
+void insert(string s) {
+	Trie* curr = this;//root
+	for (char c : s) {
+		int cur = c - 'a';
+		if (!(curr->child[cur]))curr->child[cur] = new Trie();
+		curr=curr-> child[cur];
+	}
+	curr->isLeaf = 1;
+}
+bool wordExist(string s) {
+	Trie* cur = this;//root
+	for (char c : s) {
+		int idx = c - 'a';
+		if (!cur->child[idx])return 0;
+		cur = cur->child[idx];
+	}
+	return cur->isLeaf;
+}
+
+string shortExist(string s) {
+	string ans = "";
+	Trie* cur = this;//root
+	for (char c : s) {
+		int idx = c - 'a';
+		if (!cur->child[idx])return s;// char is missed in this path
+		cur = cur->child[idx];
+		ans += c;
+		if (cur->isLeaf) {
+			return ans;
+		}
+		
+	}
+	// we reach to the end of path and no isLeaf
+	return s;
+}
+
+bool prefixExist(string s) {
+	Trie* cur = this;//root
+	for (char c : s) {
+		int idx = c - 'a';
+		if (!cur->child[idx])return 0;
+		cur = cur->child[idx];
+	}
+	return true;
+}
 
 };
 int main()
@@ -62,7 +108,7 @@ int main()
 	trie.insert("abf", 0);
 	trie.insert("xn", 0);
 	trie.insert("ab", 0);
-	trie.insert("bcd", 0);
+	trie.insert("bcd");
 	cout << trie.prefixExist("xy", 0);
 
 }
