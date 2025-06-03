@@ -7,7 +7,7 @@ class Heap {
 	// O(log(n))
 	//space O(log(n)
 	vector<int>arr;
-	void heapify(int i) {
+	void MAX_Heapify(int i) {
 		int l = 2 * i + 1;
 		int r = 2 * i + 2;
 		int mx = i;
@@ -22,7 +22,7 @@ class Heap {
 		//transition
 		if (mx != i) {
 			swap(arr[i], arr[mx]);
-			heapify(mx);
+			MAX_Heapify(mx);
 		}
 
 
@@ -30,8 +30,10 @@ class Heap {
 	void build() {
 		//O(n)
 		int n = arr.size();
+                // the correct Q here why this loop go from n over 2 down to 1 ??!
+		// the answer is simple due to from n over 2 plus 1 to n these are leaves .
 		for (int i = (n / 2) - 1; i >= 0; i--) {
-			heapify(i);
+			MAX_Heapify(i);
 		}
 	}
 public:
