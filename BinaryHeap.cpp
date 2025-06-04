@@ -51,12 +51,26 @@ public:
 	}
 }
 	int dlt() {
-		int x = arr[0];
-		swap(arr[0], arr[arr.size() - 1]);
-		arr.pop_back();
-		build();
-		return x;
+	int x = arr[0];
+	swap(arr[0], arr[arr.size() - 1]);
+	arr.pop_back();
+	int i = 0;
+	while(true)
+	{
+	  int l = 2 * i+1;
+	  int r = 2 * i + 2;
+	  int idx = i;
+	  if (l < arr.size() && arr[idx] < arr[l])idx = l;
+		
+	  if (r < arr.size() && arr[idx] < arr[r])idx = r;
+	 
+	  if (idx == i)break;
+	  swap(arr[i], arr[idx]);
+	  i = idx;
 	}
+	
+	return x;
+}
 	void print() {
 		//O(n)
 		int n = arr.size();
