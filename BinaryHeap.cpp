@@ -39,9 +39,17 @@ class Heap {
 public:
 	
 	void insert(int x) {
-		arr.push_back(x);
-		build();
+	arr.push_back(x);
+	
+	int j = arr.size() - 1;
+	int i = j;
+	while (arr[i / 2] < arr[j])
+	{
+		swap(arr[i / 2], arr[j]);
+		j /= 2;
+		i = j;
 	}
+}
 	int dlt() {
 		int x = arr[0];
 		swap(arr[0], arr[arr.size() - 1]);
