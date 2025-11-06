@@ -46,7 +46,7 @@ void val(int& ret, int one, int two, char x) {
 		ret = one - two;
 		return;
 	}
-	if (x == '/') {
+	if (x == '/'&&two!=0) {
 		ret = one / two;
 		return;
 	}
